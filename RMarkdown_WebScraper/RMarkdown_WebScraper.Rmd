@@ -17,15 +17,24 @@ The libraries that are being used in this project are httr which is used for GET
 ```{r}
 webscraper_class <- setRefClass("webscraper_class",
                                 fields = list(
-                                  base_url = "character",
-                                  in_var = "character"
+                                  base_url = "character"
                                 ),
                                 methods = list(
                                   in_var_read = function(){
-                                    in_var <<- readline(prompt = "Enter Year: ")
+                                    cat("Enter Topic:")
+                                    query <- readline(prompt = "")
+                                    cat("Enter a year between ", 2010, " through ", 2023)
+                                    volume <-readline(prompt = "")
+                                    sq_1 <- as.integer(2010:2023)
+                                    sq_2 <- 1:14
+                                    names(sq_2) <- as.character(sq_1)
+                                    volume <-  sq_2[volume]
+                                    in_var <- list(query=query,volume=volume)
+                                    return(in_var)
                                   },
                                   process_webPage = function(){
-                                    query_params <- list(query =paste0(in_var), tab="keyword")
+                                    in_var <- in_var_read()
+                                    query_params <- list(query =paste0(in_var$query), volume=paste0(in_var$volume), tab="keyword")
                                     doc <- httr::GET(base_url,query=query_params)
                                     html <- xml2::read_html(httr::content(doc, "text"))
                                     c_listing_title <- html_elements(html,"h3.c-listing__title")
