@@ -7,6 +7,9 @@ This web scraper is a work in progress application I built based on DS 636 at NJ
 
 Adjusted Querying Parameters for the webscraper. Used a list to save variables and access them query. Provided indexing for volumes aka years published.
 
+## Edit 20240126
+
+Plotted access counts as a histogram, and adjusted code to write to csv the results from the title search.
 
 ## Acknowledgements
 
